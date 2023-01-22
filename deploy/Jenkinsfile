@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent JenkinsAgent-Ubuntu-1
 
   stages {
 
