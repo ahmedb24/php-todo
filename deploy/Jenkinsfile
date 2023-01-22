@@ -1,4 +1,4 @@
-pipeline {
+
   //   agent JenkinsAgent-Ubuntu-1
     node("JenkinsAgent-Ubuntu-1") {
 
@@ -111,6 +111,4 @@ pipeline {
       }
     }
   }
-}
-
 }
