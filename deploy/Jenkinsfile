@@ -1,6 +1,9 @@
 pipeline {
     agent { label 'JenkinsAgent-Ubuntu-1' }
-//     node("") {
+    
+    triggers {
+        pollSCM('')
+    }
 
     stages {
 
