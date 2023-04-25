@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('Starter') {
       steps {
-        sh '${echo scm.branches[0]}'
+        sh 'echo ${scm.branches[0]}'
       }
     }
     stage('Build') {
