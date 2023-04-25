@@ -5,11 +5,11 @@ pipeline {
   }
   environment {
     DOCKERHUB_CREDENTIALS = credentials('dockerhub')
-    BRANCH_NAME = "${GIT_BRANCH.split("/")[1]}"
   }
   stages {
     stage('Starter') {
       steps {
+        sh 'echo scm.branches[0]'
         sh 'printenv'
       }
     }
