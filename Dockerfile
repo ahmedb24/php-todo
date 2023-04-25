@@ -19,6 +19,7 @@ WORKDIR /todo
 # Copy the Laravel application code into the container
 COPY . .
 
+
 # Rename env
 RUN mv .env.sample .env
 
