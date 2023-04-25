@@ -14,7 +14,7 @@ pipeline {
     }
     stage('Build') {
       steps {
-        sh 'docker build -t ahmedbello/php-todo:${GIT_BRANCH}-0.0.2 .'
+        sh 'docker build -t ahmedbello/php-todo:${BRANCH_NAME}-0.0.2 .'
       }
     }
     stage('Login') {
