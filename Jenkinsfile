@@ -9,13 +9,12 @@ pipeline {
   stages {
     stage('Starter') {
       steps {
-        sh 'echo scm.branches[0]'
-        sh 'printenv'
+        sh '${echo scm.branches[0]}'
       }
     }
     stage('Build') {
       steps {
-        sh 'docker build -t ahmedbello/php-todo:${GIT_LOCAL_BRANCH}-0.0.2 .'
+        sh 'docker build -t ahmedbello/php-todo:${GIT_BRANCH}-0.0.2 .'
       }
     }
     stage('Login') {
