@@ -5,8 +5,14 @@ pipeline {
   }
   environment {
     DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+    BRANCH_NAME = "${GIT_BRANCH.split("/")[1]}"
   }
   stages {
+    stage('Starter') {
+      steps {
+        sh 'printenv'
+      }
+    }
     stage('Build') {
       steps {
         sh 'docker build -t ahmedbello/php-todo:${GIT_LOCAL_BRANCH}-0.0.2 .'
