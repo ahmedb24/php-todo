@@ -19,7 +19,7 @@ pipeline {
     }
     stage('Push') {
       steps {
-        sh 'docker push ahmedbello/php-todo:${GIT_LOCAL_BRANCH}-0.0.2'
+        sh 'docker push ahmedbello/php-todo:${GIT_BRANCH}-0.0.2'
       }
     }
   }
