@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'docker build -t ahmedbello/php-todo .'
+        sh 'docker build -t ahmedbello/php-todo:${GIT_LOCAL_BRANCH}-0.0.2 .'
       }
     }
     stage('Login') {
@@ -19,7 +19,7 @@ pipeline {
     }
     stage('Push') {
       steps {
-        sh 'docker push ahmedbello/php-todo'
+        sh 'docker push ahmedbello/php-todo:${GIT_LOCAL_BRANCH}-0.0.2'
       }
     }
   }
