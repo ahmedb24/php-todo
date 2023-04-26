@@ -40,14 +40,15 @@ pipeline {
     }
     stage('Test') { 
       steps {
-        environmentVariables {
-          env('WEBSITE', websie)
-          env('TIMEOUT', 5)
-          env('ATTEMPTS', 5)
-        }
+        sh './check_status_code.sh'      
+        //environmentVariables {
+        //  env('WEBSITE', websie)
+        //  env('TIMEOUT', 5)
+        //  env('ATTEMPTS', 5)
+        //}
       
-        //Run a shell script from the workspace
-        shell(readFileFromWorkspace('./check_status_code.sh'))
+        ////Run a shell script from the workspace
+        //shell(readFileFromWorkspace('./check_status_code.sh'))
       }
     }
     stage('Push') {
