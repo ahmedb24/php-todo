@@ -34,6 +34,7 @@ pipeline {
         //Run a shell script from the workspace
         shell(readFileFromWorkspace('./check_status_code.sh'))
       }
+    }
     stage('Push') {
       steps {
         sh 'docker push ahmedbello/php-todo:${GIT_BRANCH}-0.0.2'
