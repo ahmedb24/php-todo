@@ -40,7 +40,7 @@ pipeline {
     }
     stage('Test') { 
       steps {
-        sh './check_status_code.sh'      
+        sh '/var/jenkins_home/workspace/jenkins-dockerhub_main/check_status_code.sh'      
         //environmentVariables {
         //  env('WEBSITE', websie)
         //  env('TIMEOUT', 5)
