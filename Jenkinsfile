@@ -5,6 +5,7 @@ pipeline {
   }
   environment {
     DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+    GITHUB_CREDENTIALS = credentials('github')
   }
   stages {
     stage("Initial cleanup") {
@@ -21,7 +22,8 @@ pipeline {
           doGenerateSubmoduleConfigurations: false, 
           extensions: [],
           submoduleCfg: [], 
-          userRemoteConfigs: [[url: "https://github.com/ahmedb24/php-todo.git ",credentialsId:'github']] 	
+          // branches: [[name: '$branch']],
+          userRemoteConfigs: [[url: "https://github.com/ahmedb24/php-todo.git ",credentialsId:'GITHUB_CREDENTIALS']] 	
           ])
           
         }
