@@ -7,10 +7,11 @@ pipeline {
     DOCKERHUB_CREDENTIALS = credentials('dockerhub')
   }
   stages {
-    stage('Starter') {
-      steps {
-        sh 'echo '
-      }
+    stage("Initial cleanup") {
+       steps {
+          dir("${WORKSPACE}") {
+          deleteDir()
+       }
     }
     stage('Build') {
       steps {
@@ -23,20 +24,16 @@ pipeline {
       }
     }
     stage('Test') { 
-        steps {
-          HTTP_CODE = sh (
-                        script: 'echo $(curl --write-out \\"%{http_code}\\" --silent --output /dev/null http://localhost/)',
-                        returnStdout: true
-                      ).trim()
-        
-          echo HTTP_CODE
-        
-          if ('200' != HTTP_CODE) {
-              currentBuild.result = "FAILURE"
-              error('Test stage failed!')
-          }
+      steps {
+        environmentVariables {
+          env('WEBSITE', websie)
+          env('TIMEOUT', 5)
+          env('ATTEMPTS', 5)
         }
-    }
+      
+        //Run a shell script from the workspace
+        shell(readFileFromWorkspace('./check_status_code.sh'))
+      }
     stage('Push') {
       steps {
         sh 'docker push ahmedbello/php-todo:${GIT_BRANCH}-0.0.2'
