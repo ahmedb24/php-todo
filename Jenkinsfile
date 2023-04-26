@@ -40,7 +40,38 @@ pipeline {
     }
     stage('Test') { 
       steps {
-        sh '/var/lib/docker/volumes/jenkins_home/_data/workspace/jenkins-dockerhub_main/check_status_code'      
+        sh '''#!/bin/bash
+          url=\'http://website-to-test\'
+          attempts=5
+          timeout=5
+          online=false
+          
+          echo "Checking status of $url."
+          
+          for (( i=1; i<=$attempts; i++ ))
+          do
+            code=`curl -sL --connect-timeout 20 --max-time 30 -w "%{http_code}\\\\n" "$url" -o /dev/null`
+          
+            echo "Found code $code for $url."
+          
+            if [ "$code" = "200" ]; then
+              echo "Website $url is online."
+              online=true
+              break
+            else
+              echo "Website $url seems to be offline. Waiting $timeout seconds."
+              sleep $timeout
+            fi
+          done
+          
+          if $online; then
+            echo "Monitor finished, website is online."
+            exit 0
+          else
+            echo "Monitor failed, website seems to be down."
+            exit 1
+          fi'''
+        // sh '/var/lib/docker/volumes/jenkins_home/_data/workspace/jenkins-dockerhub_main/check_status_code'      
         //environmentVariables {
         //  env('WEBSITE', websie)
         //  env('TIMEOUT', 5)
