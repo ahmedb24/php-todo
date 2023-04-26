@@ -22,6 +22,17 @@ pipeline {
         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
       }
     }
+    stage('Test') { 
+        HTTP_CODE = sh (
+                    script: 'echo $(curl --write-out \\"%{http_code}\\" --silent --output /dev/null http://localhost/)',
+                    returnStdout: true
+                ).trim()
+        echo HTTP_CODE
+        if ('200' != HTTP_CODE) {
+            currentBuild.result = "FAILURE"
+            error('Test stage failed!)
+        }
+    }
     stage('Push') {
       steps {
         sh 'docker push ahmedbello/php-todo:${GIT_BRANCH}-0.0.2'
