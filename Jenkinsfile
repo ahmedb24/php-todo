@@ -14,6 +14,18 @@ pipeline {
           }
        }
     }
+    stage('Checkout') {
+      steps {
+        checkout([
+          $class: 'GitSCM', 
+          doGenerateSubmoduleConfigurations: false, 
+          extensions: [],
+          submoduleCfg: [], 
+          userRemoteConfigs: [[url: "https://github.com/ahmedb24/php-todo.git ",credentialsId:'github']] 	
+          ])
+          
+        }
+      }
     stage('Build') {
       steps {
         sh 'docker build -t ahmedbello/php-todo:${BRANCH_NAME}-0.0.2 .'
