@@ -32,7 +32,7 @@ pipeline {
         
         if ('200' != HTTP_CODE) {
             currentBuild.result = "FAILURE"
-            error('Test stage failed!);
+            error('Test stage failed!')
         }
     }
     stage('Push') {
