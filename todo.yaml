@@ -8,6 +8,11 @@ services:
       - frontend:/app
     links:
       - db
+    restart_policy:
+        condition: on-failure
+        delay: 3s
+        max_attempts: 5
+        window: 60s
   db:
     image: mysql:5.7
     restart: always
