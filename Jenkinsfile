@@ -11,7 +11,7 @@ pipeline {
     stage('Build') {
       steps {
         //sh 'docker build -t ahmedbello/php-todo:${BRANCH_NAME}-0.0.2 .'
-        sh 'docker compose -f todo.yaml up -d'
+        sh 'docker compose -f todo.yaml up --build -d'
       }
     }
     stage('Login') {
