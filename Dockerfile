@@ -29,6 +29,6 @@ RUN composer install
 # Expose port 80 for the server
 EXPOSE 80
 
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=80"]
-
 CMD ["php", "artisan", "migrate"]
+
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=80"]
