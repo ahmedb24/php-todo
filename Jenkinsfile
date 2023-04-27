@@ -22,7 +22,7 @@ pipeline {
     stage('Test') { 
       steps {
         sh '''#!/bin/bash
-          url=\'http://website-to-test\'
+          url=\'http://54.204.162.135/'
           attempts=5
           timeout=5
           online=false
