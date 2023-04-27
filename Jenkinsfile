@@ -63,6 +63,7 @@ pipeline {
   }
   post {
     always {
+      sh 'docker compose -f todo.yaml down'
       sh 'docker logout'
     }
   }
