@@ -2,6 +2,7 @@ version: "3.9"
 services:
   frontend:
     build: .
+    image: ahmedbello/php-todo
     ports:
       - "80:80"
     volumes:
